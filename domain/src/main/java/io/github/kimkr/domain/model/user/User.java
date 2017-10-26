@@ -1,23 +1,25 @@
 package io.github.kimkr.domain.model.user;
 
-import io.github.kimkr.domain.model.Model;
+import org.greenrobot.greendao.annotation.Entity;
+
 import lombok.Data;
 
 /**
  * Created by kkr on 02/01/2017.
  */
 
+@Entity
 @Data
-public class User implements Model {
+public class User {
 
-    Profile profile;
-    TokenContainer tokenContainer;
-
-    @Override
-    public String getId() {
-        if (profile == null) {
-            return null;
-        }
-        return profile.getId();
-    }
+    private String id;
+    private String nickname;
+    private String image;
+    private String apiToken;
+    private String firebaseToken;
+    private String cognitoIdToken;
+    private String cognitoAccessToken;
+    private String cloudFrontPolicyKey;
+    private String cloudFrontSignature;
+    private String cloudFrontKeyPairId;
 }

@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.squareup.sqldelight'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     defaultPublishConfig "debug"
@@ -24,6 +24,7 @@ android {
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -57,11 +58,11 @@ dependencies {
     apt dataDependencies.autoValue
     apt dataDependencies.daggerCompiler
     apt dataDependencies.lombok
-    provided dataDependencies.autoValueAnnotation
     provided dataDependencies.javaxAnnotation
     provided dataDependencies.lombok
     compile dataDependencies.androidAnnotations
     compile dataDependencies.dagger
+    compile dataDependencies.greenDao
     compile dataDependencies.gson
     compile dataDependencies.javaxInject
     compile dataDependencies.okHttp
@@ -71,4 +72,9 @@ dependencies {
     testCompile testDependencies.junit
     testCompile testDependencies.mockito
     testCompile testDependencies.robolectric
+
+    androidTestCompile testDependencies.junit
+    androidTestCompile(testDependencies.testRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }

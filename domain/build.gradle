@@ -20,6 +20,7 @@ dependencies {
     def domainTestDependencies = rootProject.ext.domainTestDependencies
 
     provided domainDependencies.javaxAnnotation
+    compile dataDependencies.greenDao
     compile dataDependencies.lombok
     compile domainDependencies.arrow
     compile domainDependencies.javaxInject

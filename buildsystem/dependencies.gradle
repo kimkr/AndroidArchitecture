@@ -11,17 +11,22 @@ ext {
     androidTargetSdkVersion = 26
     androidCompileSdkVersion = 26
 
+    appcompatV7Version = "26.1.0"
+    supportDesignVersion = "26.1.0"
+
     //Libraries
     lombokVersion = '1.16.8'
     autoValueVersion = '1.2'
     autoValueAnnotationVersion = '1.2-update1'
     daggerVersion = '2.8'
     butterKnifeVersion = '7.0.1'
-    recyclerViewVersion = '21.0.3'
-    rxJavaVersion = '2.0.2'
-    rxAndroidVersion = '2.0.1'
+    rxAndroidVersion = '1.2.1'
+    rxJavaUtilVersion = '0.7.9.8'
+    rxJavaVersion = '1.2.10'
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
+    glideVersion = '4.2.0'
+    greenDaoVersion = '3.2.2'
     gsonVersion = '2.3'
     okHttpVersion = '2.5.0'
     androidAnnotationsVersion = '21.0.3'
@@ -35,6 +40,7 @@ ext {
     dexmakerVersion = '1.0'
     espressoVersion = '2.0'
     testingSupportLibVersion = '0.1'
+    testRunnerVersion = '0.3'
 
     //Development
     leakCanaryVersion = '1.3.1'
@@ -45,13 +51,14 @@ ext {
             autoValueAnnotation: "com.jakewharton.auto.value:auto-value-annotations:${autoValueAnnotationVersion}",
             dagger             : "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            greenDao           : "org.greenrobot:greendao:${greenDaoVersion}",
             gson               : "com.google.code.gson:gson:${gsonVersion}",
             javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject        : "javax.inject:javax.inject:${javaxInjectVersion}",
             lombok             : "org.projectlombok:lombok:${lombokVersion}",
             okHttp             : "com.squareup.okhttp:okhttp:${okHttpVersion}",
-            rxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            rxJava             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            rxJava             : "io.reactivex:rxjava:${rxJavaVersion}",
     ]
 
     dataTestDependencies = [
@@ -59,6 +66,7 @@ ext {
             junit      : "junit:junit:${jUnitVersion}",
             mockito    : "org.mockito:mockito-core:${mockitoVersion}",
             robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+            testRunner : "com.android.support.test:runner:${testRunnerVersion}",
     ]
 
     developmentDependencies = [
@@ -69,7 +77,7 @@ ext {
             arrow          : "com.fernandocejas:arrow:${arrowVersion}",
             javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject    : "javax.inject:javax.inject:${javaxInjectVersion}",
-            rxJava         : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxJava         : "io.reactivex:rxjava:${rxJavaVersion}",
     ]
 
     domainTestDependencies = [
@@ -79,13 +87,17 @@ ext {
     ]
 
     presentationDependencies = [
-            butterKnife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            dagger         : "com.google.dagger:dagger:${daggerVersion}",
-            daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            recyclerView   : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
-            rxAndroid      : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            rxJava         : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            butterKnife       : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            dagger            : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            glide             : "com.github.bumptech.glide:glide:${glideVersion}",
+            glideCompiler     : "com.github.bumptech.glide:compiler:${glideVersion}",
+            javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            recyclerView      : "com.android.support:recyclerview-v7:${appcompatV7Version}",
+            rxAndroid         : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            rxJava            : "io.reactivex:rxjava:${rxJavaVersion}",
+            supportAppcompatV7: "com.android.support:appcompat-v7:${appcompatV7Version}",
+            supportDesign     : "com.android.support:design:${supportDesignVersion}",
     ]
 
     presentationTestDependencies = [
