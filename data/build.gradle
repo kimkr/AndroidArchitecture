@@ -8,7 +8,6 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'org.greenrobot.greendao'
 
@@ -55,9 +54,9 @@ dependencies {
     def testDependencies = rootProject.ext.dataTestDependencies
 
     compile project(':domain')
-    apt dataDependencies.autoValue
-    apt dataDependencies.daggerCompiler
-    apt dataDependencies.lombok
+    provided dataDependencies.autoValue
+    provided dataDependencies.daggerCompiler
+    provided dataDependencies.lombok
     provided dataDependencies.javaxAnnotation
     provided dataDependencies.lombok
     compile dataDependencies.androidAnnotations
