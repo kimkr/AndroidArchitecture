@@ -88,7 +88,7 @@ font    | font size in sp
 Prefix | Explanation | 
 ---|---|
 Transparency	| transparent
-Brightness	    | light, original, dark (3 types)
+Brightness	    | (ultra)light, original, (ultra)dark (3 types)
 Hue	            | red, orange, yellow, green, blue, navy, purple, black, white
 
 ex) all_transparent_light_red
