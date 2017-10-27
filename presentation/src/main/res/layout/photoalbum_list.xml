@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.widget.LinearLayout" />
+
+        <variable
+            name="listViewModel"
+            type="io.github.kimkr.presentation.view.photoalbum.list.PhotoAlbumListViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:stretchMode="columnWidth"
+            binding:adapter="@{listViewModel.adapter}"
+            binding:dividerItemDecoration="@{@drawable/all_divider_list_vertical}"
+            binding:items="@{listViewModel.items}"
+            binding:orientation="@{LinearLayout.VERTICAL}" />
+
+    </RelativeLayout>
+
+</layout>

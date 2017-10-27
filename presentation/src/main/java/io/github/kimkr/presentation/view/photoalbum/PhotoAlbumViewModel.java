@@ -5,7 +5,9 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.databinding.ObservableList;
 
 import io.github.kimkr.presentation.BR;
 
@@ -17,6 +19,7 @@ public class PhotoAlbumViewModel extends BaseObservable implements LifecycleObse
 
     private ViewMode viewMode = ViewMode.LIST;
     public final ObservableField<String> text = new ObservableField<>("init");
+    public final ObservableList<PhotoAlbumItemViewModel> items = new ObservableArrayList<>();
 
     @Bindable
     public ViewMode getViewMode() {

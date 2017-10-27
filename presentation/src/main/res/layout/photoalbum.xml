@@ -4,13 +4,19 @@
 
     <data>
 
-        <import type="io.github.kimkr.presentation.view.photoalbum.ViewMode" />
+        <import type="android.view.View" />
 
         <import type="android.databinding.ObservableField" />
+
+        <import type="io.github.kimkr.presentation.view.photoalbum.ViewMode" />
 
         <variable
             name="viewModel"
             type="io.github.kimkr.presentation.view.photoalbum.PhotoAlbumViewModel" />
+
+        <variable
+            name="listViewModel"
+            type="io.github.kimkr.presentation.view.photoalbum.list.PhotoAlbumListViewModel" />
 
     </data>
 
@@ -50,11 +56,13 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.AppCompatTextView
+        <include
+            layout="@layout/photoalbum_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@{viewModel.text}" />
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.viewMode == ViewMode.LIST ? View.VISIBLE : View.GONE}"
+            android:layout_weight="1"
+            binding:listViewModel="@{listViewModel}" />
 
     </LinearLayout>
 
