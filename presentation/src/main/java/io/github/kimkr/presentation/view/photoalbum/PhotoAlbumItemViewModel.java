@@ -26,4 +26,14 @@ public class PhotoAlbumItemViewModel extends BaseObservable {
     public String getPath() {
         return content.getPath();
     }
+
+    @Bindable
+    public String getName() {
+        return content.getName();
+    }
+
+    @Bindable
+    public String getMime() {
+        return content.getMime();
+    }
 }

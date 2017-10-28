@@ -97,9 +97,6 @@ dependencies {
     compile project(':domain')
     compile project(':data')
 
-    provided presentationDependencies.daggerCompiler
-    provided presentationDependencies.glideCompiler
-
     compile presentationDependencies.dagger
     compile presentationDependencies.butterKnife
     compile presentationDependencies.glide
@@ -109,10 +106,13 @@ dependencies {
     compile presentationDependencies.rxAndroid
     compile presentationDependencies.supportAppcompatV7
     compile presentationDependencies.supportDesign
-    provided presentationDependencies.javaxAnnotation
-    provided presentationDependencies.archLifecycleCompiler
     compile presentationDependencies.archLifecycle
     compile presentationDependencies.archLifecycleExtension
+
+    annotationProcessor presentationDependencies.archLifecycleCompiler
+    annotationProcessor presentationDependencies.daggerCompiler
+    annotationProcessor presentationDependencies.glideCompiler
+    provided presentationDependencies.javaxAnnotation
 
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker

@@ -18,6 +18,11 @@
             name="listViewModel"
             type="io.github.kimkr.presentation.view.photoalbum.list.PhotoAlbumListViewModel" />
 
+        <variable
+            name="gridViewModel"
+            type="io.github.kimkr.presentation.view.photoalbum.grid.PhotoAlbumGridViewModel" />
+
+
     </data>
 
     <LinearLayout
@@ -56,13 +61,27 @@
 
         </LinearLayout>
 
-        <include
-            layout="@layout/photoalbum_list"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="@{viewModel.viewMode == ViewMode.LIST ? View.VISIBLE : View.GONE}"
-            android:layout_weight="1"
-            binding:listViewModel="@{listViewModel}" />
+            android:layout_weight="1">
+
+            <include
+                layout="@layout/photo_album_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{viewModel.viewMode == ViewMode.LIST ? View.VISIBLE : View.GONE}"
+                binding:listViewModel="@{listViewModel}" />
+
+            <include
+                layout="@layout/photo_album_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="@{viewModel.viewMode == ViewMode.GRID ? View.VISIBLE : View.GONE}"
+                binding:gridViewModel="@{gridViewModel}" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -1,14 +1,6 @@
 package io.github.kimkr.presentation.view.photoalbum;
 
 import android.Manifest;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LifecycleRegistry;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.tbruyelle.rxpermissions.RxPermissions;
 
@@ -16,6 +8,9 @@ import io.github.kimkr.data.datasource.content.ContentHelper;
 import io.github.kimkr.data.datasource.content.LocalContentDataStore;
 import io.github.kimkr.presentation.BR;
 import io.github.kimkr.presentation.R;
+import io.github.kimkr.presentation.databinding.PhotoAlbumBinding;
+import io.github.kimkr.presentation.view.BaseBindingActivity;
+import io.github.kimkr.presentation.view.photoalbum.grid.PhotoAlbumGridViewModel;
 import io.github.kimkr.presentation.view.photoalbum.list.PhotoAlbumListViewModel;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -26,22 +21,31 @@ import timber.log.Timber;
  * Created by kkr on 2017. 10. 26..
  */
 
-public class PhotoAlbumActivity extends AppCompatActivity implements LifecycleOwner {
+public class PhotoAlbumActivity extends BaseBindingActivity<PhotoAlbumBinding> {
 
-    private LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     private PhotoAlbumViewModel viewModel;
     private PhotoAlbumListViewModel listViewModel;
+    private PhotoAlbumGridViewModel gridViewModel;
     private LocalContentDataStore localContentDataStore;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayout() {
+        return R.layout.photo_album;
+    }
+
+    @Override
+    protected void injectDependency() {
         localContentDataStore = new LocalContentDataStore(this, ContentHelper.URI_IMAGE_EXTERNAL);
         viewModel = new PhotoAlbumViewModel();
         listViewModel = new PhotoAlbumListViewModel(viewModel);
-        ViewDataBinding binding = DataBindingUtil.setContentView(this, R.layout.photoalbum);
+        gridViewModel = new PhotoAlbumGridViewModel(viewModel);
+    }
+
+    @Override
+    protected void bind(PhotoAlbumBinding binding) {
         binding.setVariable(BR.viewModel, viewModel);
         binding.setVariable(BR.listViewModel, listViewModel);
+        binding.setVariable(BR.gridViewModel, gridViewModel);
     }
 
     @Override
@@ -58,13 +62,7 @@ public class PhotoAlbumActivity extends AppCompatActivity implements LifecycleOw
                         .toList()
                         .subscribeOn(Schedulers.io()))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(items -> {
-                    viewModel.items.addAll(items);
-                }, Timber::e);
-    }
-
-    @Override
-    public Lifecycle getLifecycle() {
-        return this.lifecycleRegistry;
+                .subscribe(items -> viewModel.items.addAll(items),
+                        Timber::e);
     }
 }

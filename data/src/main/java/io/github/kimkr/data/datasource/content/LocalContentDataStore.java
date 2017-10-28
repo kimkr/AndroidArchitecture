@@ -11,7 +11,6 @@ import io.github.kimkr.domain.model.Content;
 import io.github.kimkr.domain.repository.ContentDataStore;
 import rx.Completable;
 import rx.Single;
-import timber.log.Timber;
 
 /**
  * Created by kkr on 20/01/2017.
@@ -26,7 +25,6 @@ public class LocalContentDataStore implements ContentDataStore<Content> {
                                  Uri dataStoreUri) {
         this.context = context;
         this.dataStoreUri = dataStoreUri;
-        Timber.tag(LocalContentDataStore.class.getSimpleName());
     }
 
     @Override

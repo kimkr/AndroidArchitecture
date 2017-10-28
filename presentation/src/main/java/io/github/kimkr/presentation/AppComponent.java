@@ -10,7 +10,7 @@ import dagger.Component;
 import io.github.kimkr.presentation.library.logger.LoggerModule;
 
 @Singleton
-@Component(modules = {LoggerModule.class})
+@Component(modules = {ContextModule.class, LoggerModule.class})
 public interface AppComponent {
 
     void inject(App app);
