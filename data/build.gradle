@@ -67,6 +67,7 @@ dependencies {
     compile dataDependencies.okHttp
     compile dataDependencies.rxAndroid
     compile dataDependencies.rxJava
+    compile dataDependencies.timber
     testCompile testDependencies.assertj
     testCompile testDependencies.junit
     testCompile testDependencies.mockito

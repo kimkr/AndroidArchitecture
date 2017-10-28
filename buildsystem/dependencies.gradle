@@ -29,7 +29,9 @@ ext {
     rxAndroidVersion = '1.2.1'
     rxJavaUtilVersion = '0.7.9.8'
     rxJavaVersion = '1.2.10'
+    rxPermissionVersion = '0.9.4@aar'
     supportDesignVersion = "26.1.0"
+    timberVersion = '4.5.0'
     //Testing
     assertJVersion = '1.7.1'
     dexmakerVersion = '1.0'
@@ -56,6 +58,7 @@ ext {
             okHttp             : "com.squareup.okhttp:okhttp:${okHttpVersion}",
             rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}",
             rxJava             : "io.reactivex:rxjava:${rxJavaVersion}",
+            timber             : "com.jakewharton.timber:timber:${timberVersion}",
     ]
 
     dataTestDependencies = [
@@ -98,6 +101,7 @@ ext {
             rxJava                : "io.reactivex:rxjava:${rxJavaVersion}",
             supportAppcompatV7    : "com.android.support:appcompat-v7:${appcompatV7Version}",
             supportDesign         : "com.android.support:design:${supportDesignVersion}",
+            rxPermission          : "com.tbruyelle.rxpermissions:rxpermissions:${rxPermissionVersion}",
     ]
 
     presentationTestDependencies = [
