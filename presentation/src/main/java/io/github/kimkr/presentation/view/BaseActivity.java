@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 /**
  * Created by kkr on 2017. 10. 21..
  */
 
-public abstract class BaseBindingActivity<T extends ViewDataBinding> extends AppCompatActivity
+public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity
         implements LifecycleOwner {
 
     protected T binding;
@@ -25,6 +26,8 @@ public abstract class BaseBindingActivity<T extends ViewDataBinding> extends App
         return this.lifecycleRegistry;
     }
 
+    protected abstract void injectDependency(@Nullable Bundle savedInstanceState);
+
     @LayoutRes
     protected abstract int getLayout();
 
@@ -32,6 +35,7 @@ public abstract class BaseBindingActivity<T extends ViewDataBinding> extends App
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        injectDependency(savedInstanceState);
         super.onCreate(savedInstanceState);
         overridePendingTransition(0, 0);
         if (getLayout() > NO_LAYOUT) {
@@ -40,5 +44,9 @@ public abstract class BaseBindingActivity<T extends ViewDataBinding> extends App
         if (getLayout() > NO_LAYOUT) {
             bind(binding);
         }
+    }
+
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG);
     }
 }

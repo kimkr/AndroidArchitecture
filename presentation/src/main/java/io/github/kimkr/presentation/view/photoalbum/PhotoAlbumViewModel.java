@@ -1,32 +1,57 @@
 package io.github.kimkr.presentation.view.photoalbum;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
+import android.Manifest;
+import android.arch.lifecycle.DefaultLifecycleObserver;
+import android.arch.lifecycle.LifecycleOwner;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
-import android.databinding.ObservableField;
 import android.databinding.ObservableList;
+import android.support.annotation.NonNull;
+
+import com.tbruyelle.rxpermissions.RxPermissions;
+
+import java.lang.ref.WeakReference;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.github.kimkr.data.datasource.content.LocalContentDataStore;
 import io.github.kimkr.data.injection.ActivityScope;
 import io.github.kimkr.presentation.BR;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by kkr on 2017. 10. 26..
  */
 
 @ActivityScope
-public class PhotoAlbumViewModel extends BaseObservable implements LifecycleObserver {
+public class PhotoAlbumViewModel extends BaseObservable implements DefaultLifecycleObserver {
 
-    private ViewMode viewMode = ViewMode.LIST;
-    public final ObservableField<String> text = new ObservableField<>("init");
     public final ObservableList<PhotoAlbumItemViewModel> items = new ObservableArrayList<>();
+    ViewMode viewMode = ViewMode.LIST;
+    @Inject
+    WeakReference<PhotoAlbumActivity> activityWeakReference;
+    @Inject
+    LocalContentDataStore localContentDataStore;
 
     @Inject
     public PhotoAlbumViewModel() {
+    }
+
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        gainStoragePermission()
+                .flatMap(granted -> {
+                    if (granted) {
+                        return loadItems();
+                    }
+                    return Observable.error(new Exception("Failed to gain permission"));
+                })
+                .subscribe(items -> this.items.addAll(items),
+                        e -> activityWeakReference.get().showToast(e.getMessage()));
     }
 
     @Bindable
@@ -39,13 +64,19 @@ public class PhotoAlbumViewModel extends BaseObservable implements LifecycleObse
         notifyPropertyChanged(BR.viewMode);
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    public void onStart() {
-        text.set("started");
+    public Observable<List<PhotoAlbumItemViewModel>> loadItems() {
+        return localContentDataStore.getContents()
+                .toObservable()
+                .flatMap(Observable::from)
+                .map(PhotoAlbumItemViewModel::new)
+                .toList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void onStop() {
-        text.set("stopped");
+    private Observable<Boolean> gainStoragePermission() {
+        RxPermissions permissions = new RxPermissions(activityWeakReference.get());
+        return permissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 }

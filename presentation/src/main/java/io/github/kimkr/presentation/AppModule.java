@@ -7,12 +7,13 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumComponent;
 
 /**
  * Created by kkr on 2017. 10. 29..
  */
 
-@Module
+@Module(subcomponents = {PhotoAlbumComponent.class})
 public class AppModule {
 
     @Provides

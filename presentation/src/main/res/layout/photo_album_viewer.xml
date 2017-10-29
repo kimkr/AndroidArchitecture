@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.databinding.ObservableField" />
+
+        <import type="android.widget.LinearLayout" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewerViewModel"
+            type="io.github.kimkr.presentation.view.photoalbum.viewer.PhotoAlbumViewerViewModel" />
+    </data>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        app:adapter="@{viewerViewModel.adapter}"
+        app:columns="@{1}"
+        app:items="@{viewerViewModel.items}"
+        app:orientation="@{LinearLayout.HORIZONTAL}"
+        app:viewpager="@{true}" />
+
+</layout>

@@ -16,6 +16,9 @@ import dagger.Provides;
 @Module
 public class DataStoreModule {
 
+//    @Provides
+//    @Singleton
+
     @Provides
     @Singleton
     @Named("app_content_uri")

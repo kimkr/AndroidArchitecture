@@ -7,7 +7,6 @@ repositories {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -26,6 +25,10 @@ android {
         testApplicationId globalConfiguration.getAt("testApplicationId")
 
         multiDexEnabled true
+
+        jackOptions {
+            enabled true
+        }
     }
 
     compileOptions {
@@ -107,14 +110,12 @@ dependencies {
     compile presentationDependencies.rxAndroid
     compile presentationDependencies.supportAppcompatV7
     compile presentationDependencies.supportDesign
-    compile presentationDependencies.archLifecycle
-    compile presentationDependencies.archLifecycleExtension
 
+    provided presentationDependencies.javaxAnnotation
     annotationProcessor presentationDependencies.daggerCompiler
     annotationProcessor presentationDependencies.daggerAndroidCompiler
-    annotationProcessor presentationDependencies.archLifecycleCompiler
     annotationProcessor presentationDependencies.glideCompiler
-    provided presentationDependencies.javaxAnnotation
+    compile presentationDependencies.archLifecycleJava8
 
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker

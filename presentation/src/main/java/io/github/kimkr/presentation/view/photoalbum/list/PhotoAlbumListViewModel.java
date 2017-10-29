@@ -4,9 +4,12 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableList;
 
+import java.lang.ref.WeakReference;
+
 import javax.inject.Inject;
 
 import io.github.kimkr.data.injection.ActivityScope;
+import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumActivity;
 import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumItemViewModel;
 import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumViewModel;
 
@@ -17,13 +20,15 @@ import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumViewModel;
 @ActivityScope
 public class PhotoAlbumListViewModel extends BaseObservable {
 
-    private final PhotoAlbumViewModel viewModel;
-    private final PhotoAlbumListAdapter adapter;
+    @Inject
+    PhotoAlbumViewModel viewModel;
+    @Inject
+    PhotoAlbumListAdapter adapter;
+    @Inject
+    WeakReference<PhotoAlbumActivity> activityWeakReference;
 
     @Inject
-    public PhotoAlbumListViewModel(PhotoAlbumViewModel viewModel) {
-        this.viewModel = viewModel;
-        this.adapter = new PhotoAlbumListAdapter();
+    public PhotoAlbumListViewModel() {
     }
 
     @Bindable
@@ -34,5 +39,9 @@ public class PhotoAlbumListViewModel extends BaseObservable {
     @Bindable
     public PhotoAlbumListAdapter getAdapter() {
         return adapter;
+    }
+
+    public void onClickContent(Long id) {
+        activityWeakReference.get().showViewer(id);
     }
 }

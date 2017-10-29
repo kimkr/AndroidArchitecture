@@ -11,8 +11,9 @@ ext {
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 26
     //Libraries
-    androidArchVersion = "1.0.0-alpha3"
     androidAnnotationsVersion = '21.0.3'
+    // https://developer.android.com/topic/libraries/architecture/adding-components.html
+    androidArchVersion = "1.0.0-rc1"
     appcompatV7Version = "26.1.0"
     arrowVersion = '1.0.0'
     autoValueAnnotationVersion = '1.2-update1'
@@ -89,11 +90,9 @@ ext {
             mockito: "org.mockito:mockito-core:${mockitoVersion}",
     ]
 
-
     presentationDependencies = [
-            archLifecycle         : "android.arch.lifecycle:runtime:${androidArchVersion}",
             archLifecycleExtension: "android.arch.lifecycle:extensions:${androidArchVersion}",
-            archLifecycleCompiler : "android.arch.lifecycle:compiler:${androidArchVersion}",
+            archLifecycleJava8    : "android.arch.lifecycle:common-java8:${androidArchVersion}",
             butterKnife           : "com.jakewharton:butterknife:${butterKnifeVersion}",
             dagger                : "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
