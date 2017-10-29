@@ -9,17 +9,25 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
 
+import javax.inject.Inject;
+
+import io.github.kimkr.data.injection.ActivityScope;
 import io.github.kimkr.presentation.BR;
 
 /**
  * Created by kkr on 2017. 10. 26..
  */
 
+@ActivityScope
 public class PhotoAlbumViewModel extends BaseObservable implements LifecycleObserver {
 
     private ViewMode viewMode = ViewMode.LIST;
     public final ObservableField<String> text = new ObservableField<>("init");
     public final ObservableList<PhotoAlbumItemViewModel> items = new ObservableArrayList<>();
+
+    @Inject
+    public PhotoAlbumViewModel() {
+    }
 
     @Bindable
     public ViewMode getViewMode() {

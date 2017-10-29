@@ -1,15 +1,20 @@
 package io.github.kimkr.presentation.view.photoalbum;
 
 import android.Manifest;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.tbruyelle.rxpermissions.RxPermissions;
 
-import io.github.kimkr.data.datasource.content.ContentHelper;
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import io.github.kimkr.data.datasource.content.LocalContentDataStore;
 import io.github.kimkr.presentation.BR;
 import io.github.kimkr.presentation.R;
 import io.github.kimkr.presentation.databinding.PhotoAlbumBinding;
 import io.github.kimkr.presentation.view.BaseBindingActivity;
+import io.github.kimkr.presentation.view.Constants;
 import io.github.kimkr.presentation.view.photoalbum.grid.PhotoAlbumGridViewModel;
 import io.github.kimkr.presentation.view.photoalbum.list.PhotoAlbumListViewModel;
 import rx.Observable;
@@ -23,10 +28,15 @@ import timber.log.Timber;
 
 public class PhotoAlbumActivity extends BaseBindingActivity<PhotoAlbumBinding> {
 
-    private PhotoAlbumViewModel viewModel;
-    private PhotoAlbumListViewModel listViewModel;
-    private PhotoAlbumGridViewModel gridViewModel;
-    private LocalContentDataStore localContentDataStore;
+    @Inject
+    LocalContentDataStore localContentDataStore;
+    @Inject
+    PhotoAlbumViewModel viewModel;
+    @Inject
+    PhotoAlbumListViewModel listViewModel;
+    @Inject
+    PhotoAlbumGridViewModel gridViewModel;
+    String id;
 
     @Override
     protected int getLayout() {
@@ -34,18 +44,17 @@ public class PhotoAlbumActivity extends BaseBindingActivity<PhotoAlbumBinding> {
     }
 
     @Override
-    protected void injectDependency() {
-        localContentDataStore = new LocalContentDataStore(this, ContentHelper.URI_IMAGE_EXTERNAL);
-        viewModel = new PhotoAlbumViewModel();
-        listViewModel = new PhotoAlbumListViewModel(viewModel);
-        gridViewModel = new PhotoAlbumGridViewModel(viewModel);
-    }
-
-    @Override
     protected void bind(PhotoAlbumBinding binding) {
         binding.setVariable(BR.viewModel, viewModel);
         binding.setVariable(BR.listViewModel, listViewModel);
         binding.setVariable(BR.gridViewModel, gridViewModel);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        id = getIntent().getStringExtra(Constants.EXTRA_ID);
+        AndroidInjection.inject(this);
+        super.onCreate(savedInstanceState);
     }
 
     @Override

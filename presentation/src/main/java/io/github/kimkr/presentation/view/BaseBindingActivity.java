@@ -28,8 +28,6 @@ public abstract class BaseBindingActivity<T extends ViewDataBinding> extends App
     @LayoutRes
     protected abstract int getLayout();
 
-    protected abstract void injectDependency();
-
     protected abstract void bind(T binding);
 
     @Override
@@ -39,7 +37,6 @@ public abstract class BaseBindingActivity<T extends ViewDataBinding> extends App
         if (getLayout() > NO_LAYOUT) {
             binding = DataBindingUtil.setContentView(this, getLayout());
         }
-        injectDependency();
         if (getLayout() > NO_LAYOUT) {
             bind(binding);
         }

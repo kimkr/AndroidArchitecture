@@ -7,6 +7,10 @@ import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import io.github.kimkr.domain.model.Content;
 import io.github.kimkr.domain.repository.ContentDataStore;
 import rx.Completable;
@@ -16,13 +20,15 @@ import rx.Single;
  * Created by kkr on 20/01/2017.
  */
 
+@Singleton
 public class LocalContentDataStore implements ContentDataStore<Content> {
 
     private final Context context;
     private final Uri dataStoreUri;
 
+    @Inject
     public LocalContentDataStore(Context context,
-                                 Uri dataStoreUri) {
+                                 @Named("app_content_uri") Uri dataStoreUri) {
         this.context = context;
         this.dataStoreUri = dataStoreUri;
     }

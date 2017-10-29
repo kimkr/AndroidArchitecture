@@ -56,11 +56,13 @@ dependencies {
     compile project(':domain')
     provided dataDependencies.autoValue
     provided dataDependencies.daggerCompiler
+    provided dataDependencies.daggerAndroidCompiler
     provided dataDependencies.lombok
     provided dataDependencies.javaxAnnotation
     provided dataDependencies.lombok
     compile dataDependencies.androidAnnotations
     compile dataDependencies.dagger
+    compile dataDependencies.daggerAndroidSupport
     compile dataDependencies.greenDao
     compile dataDependencies.gson
     compile dataDependencies.javaxInject

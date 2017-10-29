@@ -24,6 +24,9 @@ public class ImageViewBinding {
 
     @BindingConversion
     public static MediaType convertMimeToMediaType(String mime) {
+        if (mime == null || mime.isEmpty()) {
+            return MediaType.NA;
+        }
         if (mime.contains("video/")) {
             return MediaType.VIDEO;
         } else if (mime.contains("/gif")) {

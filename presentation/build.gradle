@@ -98,6 +98,7 @@ dependencies {
     compile project(':data')
 
     compile presentationDependencies.dagger
+    compile presentationDependencies.daggerAndroidSupport
     compile presentationDependencies.butterKnife
     compile presentationDependencies.glide
     compile presentationDependencies.recyclerView
@@ -109,16 +110,21 @@ dependencies {
     compile presentationDependencies.archLifecycle
     compile presentationDependencies.archLifecycleExtension
 
-    annotationProcessor presentationDependencies.archLifecycleCompiler
     annotationProcessor presentationDependencies.daggerCompiler
+    annotationProcessor presentationDependencies.daggerAndroidCompiler
+    annotationProcessor presentationDependencies.archLifecycleCompiler
     annotationProcessor presentationDependencies.glideCompiler
     provided presentationDependencies.javaxAnnotation
 
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker
     androidTestCompile presentationTestDependencies.dexmakerMockito
-    androidTestCompile presentationTestDependencies.espresso
-    androidTestCompile presentationTestDependencies.testingSupportLib
+
+    // ERROR : http://g.co/androidstudio/app-test-app-conflict
+//    androidTestCompile(presentationTestDependencies.espresso, {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
+//    androidTestCompile presentationTestDependencies.testingSupportLib
 
     //Development
     compile developmentDependencies.leakCanary
