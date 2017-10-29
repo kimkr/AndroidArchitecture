@@ -23,12 +23,17 @@ public class PhotoAlbumGridViewModel extends BaseObservable {
     @Inject
     PhotoAlbumViewModel viewModel;
     @Inject
-    PhotoAlbumGridAdapter adapter;
-    @Inject
     WeakReference<PhotoAlbumActivity> activityWeakReference;
+    PhotoAlbumGridAdapter adapter;
 
     @Inject
     public PhotoAlbumGridViewModel() {
+    }
+
+    @Inject
+    public void setAdapter(PhotoAlbumGridAdapter adapter) {
+        this.adapter = adapter;
+        adapter.setViewModel(this);
     }
 
     @Bindable

@@ -23,12 +23,17 @@ public class PhotoAlbumListViewModel extends BaseObservable {
     @Inject
     PhotoAlbumViewModel viewModel;
     @Inject
-    PhotoAlbumListAdapter adapter;
-    @Inject
     WeakReference<PhotoAlbumActivity> activityWeakReference;
+    PhotoAlbumListAdapter adapter;
 
     @Inject
     public PhotoAlbumListViewModel() {
+    }
+
+    @Inject
+    public void setAdapter(PhotoAlbumListAdapter adapter) {
+        this.adapter = adapter;
+        adapter.setViewModel(this);
     }
 
     @Bindable

@@ -12,8 +12,8 @@ import io.github.kimkr.presentation.viewcomponent.recyclerview.BaseDataBindingAd
  */
 
 @ActivityScope
-public class PhotoAlbumListAdapter extends BaseDataBindingAdapter<PhotoAlbumItemViewModel,
-        PhotoAlbumListViewModel> {
+public class PhotoAlbumListAdapter extends BaseDataBindingAdapter<PhotoAlbumListViewModel,
+        PhotoAlbumItemViewModel> {
 
     @Inject
     public PhotoAlbumListAdapter() {

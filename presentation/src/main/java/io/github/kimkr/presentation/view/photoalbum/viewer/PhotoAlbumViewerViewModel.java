@@ -28,13 +28,18 @@ public class PhotoAlbumViewerViewModel extends BaseObservable implements Default
     @Inject
     PhotoAlbumViewModel viewModel;
     @Inject
-    PhotoAlbumViewerAdapter adapter;
-    @Inject
     @Named("viewer_start_content")
     Long startContent;
+    PhotoAlbumViewerAdapter adapter;
 
     @Inject
     public PhotoAlbumViewerViewModel() {
+    }
+
+    @Inject
+    public void setAdapter(PhotoAlbumViewerAdapter adapter) {
+        this.adapter = adapter;
+        adapter.setViewModel(this);
     }
 
     @Bindable

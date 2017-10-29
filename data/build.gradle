@@ -7,14 +7,6 @@ buildscript {
 apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao'
 
-// Java8 not fully supported in library projects yet, https://code.google.com/p/android/issues/detail?id=211386
-// this is a temporary workaround to get at least lambdas compiling
-gradle.projectsEvaluated {
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xbootclasspath/a:" + System.properties.get("java.home") + "/lib/rt.jar"
-    }
-}
-
 android {
     defaultPublishConfig "debug"
 
@@ -28,6 +20,12 @@ android {
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
     }
 
     compileOptions {
@@ -58,12 +56,12 @@ dependencies {
     def testDependencies = rootProject.ext.dataTestDependencies
 
     compile project(':domain')
-    provided dataDependencies.autoValue
-    provided dataDependencies.daggerCompiler
-    provided dataDependencies.daggerAndroidCompiler
-    provided dataDependencies.lombok
+    annotationProcessor dataDependencies.autoValue
+    annotationProcessor dataDependencies.daggerCompiler
+    annotationProcessor dataDependencies.daggerAndroidCompiler
+    annotationProcessor dataDependencies.lombok
     provided dataDependencies.javaxAnnotation
-    provided dataDependencies.lombok
+    compile dataDependencies.lombok
     compile dataDependencies.androidAnnotations
     compile dataDependencies.dagger
     compile dataDependencies.daggerAndroidSupport

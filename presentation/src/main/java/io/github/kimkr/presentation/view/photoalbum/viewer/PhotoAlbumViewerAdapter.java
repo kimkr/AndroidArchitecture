@@ -12,8 +12,8 @@ import io.github.kimkr.presentation.viewcomponent.recyclerview.BaseDataBindingAd
  */
 
 @FragmentScope
-public class PhotoAlbumViewerAdapter extends BaseDataBindingAdapter<PhotoAlbumItemViewModel,
-        PhotoAlbumViewerViewModel> {
+public class PhotoAlbumViewerAdapter extends BaseDataBindingAdapter<PhotoAlbumViewerViewModel,
+        PhotoAlbumItemViewModel> {
 
     @Inject
     public PhotoAlbumViewerAdapter() {

@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import io.github.kimkr.data.injection.ActivityScope;
 import io.github.kimkr.presentation.R;
 import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumItemViewModel;
-import io.github.kimkr.presentation.view.photoalbum.list.PhotoAlbumListViewModel;
 import io.github.kimkr.presentation.viewcomponent.recyclerview.BaseDataBindingAdapter;
 
 /**
@@ -13,8 +12,8 @@ import io.github.kimkr.presentation.viewcomponent.recyclerview.BaseDataBindingAd
  */
 
 @ActivityScope
-public class PhotoAlbumGridAdapter extends BaseDataBindingAdapter<PhotoAlbumItemViewModel,
-        PhotoAlbumListViewModel> {
+public class PhotoAlbumGridAdapter extends BaseDataBindingAdapter<PhotoAlbumGridViewModel,
+        PhotoAlbumItemViewModel> {
 
     @Inject
     public PhotoAlbumGridAdapter() {
