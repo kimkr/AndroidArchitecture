@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import io.github.kimkr.domain.model.Content;
+import io.github.kimkr.data.entity.content.Content;
 import io.github.kimkr.domain.repository.ContentDataStore;
 import rx.Completable;
 import rx.Single;

@@ -1,5 +1,9 @@
 package io.github.kimkr.presentation.library.logger;
 
+import android.content.Context;
+
+import com.facebook.stetho.Stetho;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -15,7 +19,12 @@ public class LoggerModule {
 
     @Provides
     @Singleton
-    Timber.Tree provideTimberDebugTree() {
+    Timber.Tree provideTimberDebugTree(Context context) {
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(context)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(context))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(context))
+                        .build());
         return new Timber.DebugTree();
     }
 }

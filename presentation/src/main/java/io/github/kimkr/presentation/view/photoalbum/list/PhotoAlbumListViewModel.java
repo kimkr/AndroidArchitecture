@@ -4,12 +4,9 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableList;
 
-import java.lang.ref.WeakReference;
-
 import javax.inject.Inject;
 
 import io.github.kimkr.data.injection.ActivityScope;
-import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumActivity;
 import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumItemViewModel;
 import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumViewModel;
 
@@ -22,8 +19,6 @@ public class PhotoAlbumListViewModel extends BaseObservable {
 
     @Inject
     PhotoAlbumViewModel viewModel;
-    @Inject
-    WeakReference<PhotoAlbumActivity> activityWeakReference;
     PhotoAlbumListAdapter adapter;
 
     @Inject
@@ -47,6 +42,6 @@ public class PhotoAlbumListViewModel extends BaseObservable {
     }
 
     public void onClickContent(Long id) {
-        activityWeakReference.get().showViewer(id);
+        viewModel.startViewer(id);
     }
 }

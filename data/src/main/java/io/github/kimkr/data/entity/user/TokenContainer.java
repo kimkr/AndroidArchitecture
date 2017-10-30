@@ -1,4 +1,4 @@
-package io.github.kimkr.domain.model.user;
+package io.github.kimkr.data.entity.user;
 
 import java.util.Date;
 

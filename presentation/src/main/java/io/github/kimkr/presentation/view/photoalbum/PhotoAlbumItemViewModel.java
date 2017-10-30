@@ -3,7 +3,7 @@ package io.github.kimkr.presentation.view.photoalbum;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
-import io.github.kimkr.domain.model.Content;
+import io.github.kimkr.data.entity.content.Content;
 
 /**
  * Created by kkr on 2017. 10. 28..
@@ -35,5 +35,9 @@ public class PhotoAlbumItemViewModel extends BaseObservable {
     @Bindable
     public String getMime() {
         return content.getMime();
+    }
+
+    public Content getContent(){
+        return content;
     }
 }

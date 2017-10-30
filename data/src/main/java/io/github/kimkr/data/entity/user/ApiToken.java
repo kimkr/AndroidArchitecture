@@ -1,4 +1,5 @@
-package io.github.kimkr.domain.model.user;
+package io.github.kimkr.data.entity.user;
+
 
 import lombok.Data;
 
@@ -7,7 +8,7 @@ import lombok.Data;
  */
 
 @Data
-public class FirebaseToken {
+public class ApiToken {
 
     private String token;
 }

@@ -111,6 +111,10 @@ dependencies {
     compile presentationDependencies.rxAndroid
     compile presentationDependencies.supportAppcompatV7
     compile presentationDependencies.supportDesign
+    compile developmentDependencies.stetho
+    compile developmentDependencies.stethoConsole
+    compile developmentDependencies.stethoOkhttp
+    compile developmentDependencies.stethoUrlConneciton
 
     provided presentationDependencies.javaxAnnotation
     annotationProcessor presentationDependencies.daggerCompiler

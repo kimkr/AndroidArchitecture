@@ -17,11 +17,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.github.kimkr.data.datasource.content.LocalContentDataStore;
+import io.github.kimkr.data.entity.content.ContentDao;
 import io.github.kimkr.data.injection.ActivityScope;
 import io.github.kimkr.presentation.BR;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by kkr on 2017. 10. 26..
@@ -36,6 +38,8 @@ public class PhotoAlbumViewModel extends BaseObservable implements DefaultLifecy
     WeakReference<PhotoAlbumActivity> activityWeakReference;
     @Inject
     LocalContentDataStore localContentDataStore;
+    @Inject
+    ContentDao contentDao;
 
     @Inject
     public PhotoAlbumViewModel() {
@@ -62,6 +66,17 @@ public class PhotoAlbumViewModel extends BaseObservable implements DefaultLifecy
     public void setViewMode(ViewMode viewMode) {
         this.viewMode = viewMode;
         notifyPropertyChanged(BR.viewMode);
+    }
+
+    public void startViewer(Long startContent) {
+        // TEST
+        Observable.from(items)
+                .filter(item -> item.getId().equals(startContent))
+                .first()
+                .map(item -> item.getContent())
+                .subscribe(content -> contentDao.insert(content),
+                        Timber::e);
+        activityWeakReference.get().showViewer(startContent);
     }
 
     public Observable<List<PhotoAlbumItemViewModel>> loadItems() {

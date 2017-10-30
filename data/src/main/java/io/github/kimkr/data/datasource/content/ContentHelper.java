@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import io.github.kimkr.domain.model.Content;
+import io.github.kimkr.data.entity.content.Content;
 import rx.functions.Func1;
 
 /**
@@ -37,39 +37,36 @@ public class ContentHelper {
     public static final String ORDERBY =
             String.format("IFNULL(%s, IFNULL(%s, 0)) ASC", DATE_ADDED, DATE_TAKEN);
 
-    public static Func1<Cursor, Content> mapper = new Func1<Cursor, Content>() {
-        @Override
-        public Content call(Cursor cursor) {
-            Content content = new Content();
-            int idxId = cursor.getColumnIndex(ID);
-            int idxFilepath = cursor.getColumnIndex(FILEPATH);
-            int idxFileName = cursor.getColumnIndex(FILENAME);
-            int idxMime = cursor.getColumnIndex(MIME);
-            int idxDateAdded = cursor.getColumnIndex(DATE_ADDED);
-            int idxDateModified = cursor.getColumnIndex(DATE_MODIFIED);
-            int idxDateTaken = cursor.getColumnIndex(DATE_TAKEN);
-            int idxWidth = cursor.getColumnIndex(WIDTH);
-            int idxHeight = cursor.getColumnIndex(HEIGHT);
-            int idxSize = cursor.getColumnIndex(SIZE);
-            int idxLat = cursor.getColumnIndex(LATITUDE);
-            int idxLon = cursor.getColumnIndex(LONGITUDE);
-            int idxLoc = cursor.getColumnIndex(LOCATION);
-            int idxOrientation = cursor.getColumnIndex(ORIENTATION);
-            content.setId(cursor.getLong(idxId));
-            content.setPath(cursor.getString(idxFilepath));
-            content.setName(cursor.getString(idxFileName));
-            content.setMime(cursor.getString(idxMime));
-            content.setTaken(cursor.getLong(idxDateTaken));
-            content.setAdded(cursor.getLong(idxDateAdded));
-            content.setModified(cursor.getLong(idxDateModified));
-            content.setWidth(cursor.getLong(idxWidth));
-            content.setHeight(cursor.getLong(idxHeight));
-            content.setSize(cursor.getLong(idxSize));
-            content.setLatitude(cursor.getFloat(idxLat));
-            content.setLongitude(cursor.getFloat(idxLon));
-            content.setLocation(cursor.getString(idxLoc));
-            content.setOrientation(cursor.getInt(idxOrientation));
-            return content;
-        }
+    public static Func1<Cursor, Content> mapper = cursor -> {
+        Content content = new Content();
+        int idxId = cursor.getColumnIndex(ID);
+        int idxFilepath = cursor.getColumnIndex(FILEPATH);
+        int idxFileName = cursor.getColumnIndex(FILENAME);
+        int idxMime = cursor.getColumnIndex(MIME);
+        int idxDateAdded = cursor.getColumnIndex(DATE_ADDED);
+        int idxDateModified = cursor.getColumnIndex(DATE_MODIFIED);
+        int idxDateTaken = cursor.getColumnIndex(DATE_TAKEN);
+        int idxWidth = cursor.getColumnIndex(WIDTH);
+        int idxHeight = cursor.getColumnIndex(HEIGHT);
+        int idxSize = cursor.getColumnIndex(SIZE);
+        int idxLat = cursor.getColumnIndex(LATITUDE);
+        int idxLon = cursor.getColumnIndex(LONGITUDE);
+        int idxLoc = cursor.getColumnIndex(LOCATION);
+        int idxOrientation = cursor.getColumnIndex(ORIENTATION);
+        content.setId(cursor.getLong(idxId));
+        content.setPath(cursor.getString(idxFilepath));
+        content.setName(cursor.getString(idxFileName));
+        content.setMime(cursor.getString(idxMime));
+        content.setTaken(cursor.getLong(idxDateTaken));
+        content.setAdded(cursor.getLong(idxDateAdded));
+        content.setModified(cursor.getLong(idxDateModified));
+        content.setWidth(cursor.getLong(idxWidth));
+        content.setHeight(cursor.getLong(idxHeight));
+        content.setSize(cursor.getLong(idxSize));
+        content.setLatitude(cursor.getFloat(idxLat));
+        content.setLongitude(cursor.getFloat(idxLon));
+        content.setLocation(cursor.getString(idxLoc));
+        content.setOrientation(cursor.getInt(idxOrientation));
+        return content;
     };
 }
