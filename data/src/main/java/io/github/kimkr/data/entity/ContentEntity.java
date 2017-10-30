@@ -1,18 +1,15 @@
-package io.github.kimkr.data.entity.content;
+package io.github.kimkr.data.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
-
-import lombok.Data;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by kkr on 2017. 10. 28..
  */
 
 @Entity
-@Data
-public class Content {
+public class ContentEntity {
 
     @Id
     private Long id;
@@ -30,11 +27,11 @@ public class Content {
     private Long modified;
     private Long size;
     private Integer orientation;
-    @Generated(hash = 1934307620)
-    public Content(Long id, String path, String name, String mime, String location,
-            Float latitude, Float longitude, Long width, Long height,
-            Long timeStamp, Long added, Long taken, Long modified, Long size,
-            Integer orientation) {
+    @Generated(hash = 1918079)
+    public ContentEntity(Long id, String path, String name, String mime,
+            String location, Float latitude, Float longitude, Long width,
+            Long height, Long timeStamp, Long added, Long taken, Long modified,
+            Long size, Integer orientation) {
         this.id = id;
         this.path = path;
         this.name = name;
@@ -51,8 +48,8 @@ public class Content {
         this.size = size;
         this.orientation = orientation;
     }
-    @Generated(hash = 940998559)
-    public Content() {
+    @Generated(hash = 271396990)
+    public ContentEntity() {
     }
     public Long getId() {
         return this.id;

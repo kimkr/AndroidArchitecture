@@ -3,7 +3,7 @@ package io.github.kimkr.presentation.view.photoalbum;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
-import io.github.kimkr.data.entity.content.Content;
+import io.github.kimkr.domain.entity.Content;
 
 /**
  * Created by kkr on 2017. 10. 28..

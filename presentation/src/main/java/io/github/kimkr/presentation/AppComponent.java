@@ -11,7 +11,8 @@ import javax.inject.Singleton;
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.support.AndroidSupportInjectionModule;
-import io.github.kimkr.data.datasource.DataStoreModule;
+import io.github.kimkr.data.repository.content.ContentRepositoryModule;
+import io.github.kimkr.data.repository.DaoModule;
 import io.github.kimkr.presentation.library.logger.LoggerModule;
 
 @Singleton
@@ -19,7 +20,8 @@ import io.github.kimkr.presentation.library.logger.LoggerModule;
         AndroidSupportInjectionModule.class,
         AppModule.class,
         LoggerModule.class,
-        DataStoreModule.class,
+        DaoModule.class,
+        ContentRepositoryModule.class,
         ActivityBuilder.class})
 public interface AppComponent {
 

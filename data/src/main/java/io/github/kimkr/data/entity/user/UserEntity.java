@@ -1,8 +1,6 @@
 package io.github.kimkr.data.entity.user;
 
 import org.greenrobot.greendao.annotation.Entity;
-
-import lombok.Data;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -10,8 +8,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 
 @Entity
-@Data
-public class User {
+public class UserEntity {
 
     private String id;
     private String nickname;
@@ -23,8 +20,8 @@ public class User {
     private String cloudFrontPolicyKey;
     private String cloudFrontSignature;
     private String cloudFrontKeyPairId;
-    @Generated(hash = 1472238991)
-    public User(String id, String nickname, String image, String apiToken,
+    @Generated(hash = 205749490)
+    public UserEntity(String id, String nickname, String image, String apiToken,
             String firebaseToken, String cognitoIdToken, String cognitoAccessToken,
             String cloudFrontPolicyKey, String cloudFrontSignature,
             String cloudFrontKeyPairId) {
@@ -39,8 +36,8 @@ public class User {
         this.cloudFrontSignature = cloudFrontSignature;
         this.cloudFrontKeyPairId = cloudFrontKeyPairId;
     }
-    @Generated(hash = 586692638)
-    public User() {
+    @Generated(hash = 1433178141)
+    public UserEntity() {
     }
     public String getId() {
         return this.id;
