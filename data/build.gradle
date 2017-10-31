@@ -61,6 +61,9 @@ dependencies {
     annotationProcessor dataDependencies.daggerAndroidCompiler
     annotationProcessor dataDependencies.lombok
     provided dataDependencies.javaxAnnotation
+    implementation dataDependencies.firebaseAuth
+    implementation dataDependencies.firebaseDatabase
+    implementation dataDependencies.firebaseStorage
     compile dataDependencies.lombok
     compile dataDependencies.androidAnnotations
     compile dataDependencies.dagger
@@ -70,6 +73,8 @@ dependencies {
     compile dataDependencies.javaxInject
     compile dataDependencies.okHttp
     compile dataDependencies.rxAndroid
+    compile dataDependencies.rxFirebaseAuth
+    compile dataDependencies.rxFirebaseDatabase
     compile dataDependencies.rxJava
     compile dataDependencies.timber
     testCompile testDependencies.assertj

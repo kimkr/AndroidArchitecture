@@ -1,3 +1,5 @@
 <resources>
     <dimen name="size_all_btn_corner">4dp</dimen>
+    <dimen name="height_auth_toolbar">56dp</dimen>
+    <dimen name="size_auth_toolbar_btn">24dp</dimen>
 </resources>

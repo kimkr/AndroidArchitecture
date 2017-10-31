@@ -7,8 +7,8 @@ import javax.inject.Singleton;
 
 import io.github.kimkr.domain.entity.Content;
 import io.github.kimkr.domain.repository.ContentRepository;
-import rx.Completable;
-import rx.Single;
+import io.reactivex.Completable;
+import io.reactivex.Single;
 import timber.log.Timber;
 
 /**

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="io.github.kimkr.presentation.view.auth.ViewMode" />
+
+        <variable
+            name="viewModel"
+            type="io.github.kimkr.presentation.view.auth.AuthViewModel" />
+
+        <variable
+            name="signUpViewModel"
+            type="io.github.kimkr.presentation.view.auth.signup.AuthSignUpViewModel" />
+
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:overScrollMode="never">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="39dp"
+            android:paddingRight="39dp"
+            android:paddingTop="32.5dp">
+
+            <TextView
+                android:id="@+id/tv_sign_up_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|left"
+                android:includeFontPadding="false"
+                android:text="@string/auth_sign_up_enter_info"
+                android:textColor="@color/black"
+                android:textSize="14.5sp" />
+
+            <TextView
+                android:id="@+id/tv_sign_up_id_guide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_sign_up_title"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:includeFontPadding="false"
+                android:text="@string/auth_sign_up_email_guide"
+                android:textColor="@color/black"
+                android:textSize="12.5sp" />
+
+            <include
+                android:id="@+id/input_sign_up_id"
+                layout="@layout/v_input_over_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_sign_up_id_guide"
+                binding:checker="@{signUpViewModel.idChecker}"
+                binding:error="@{@string/auth_all_id_invalid_message}"
+                binding:essential="@{true}"
+                binding:hint="@{@string/auth_sign_up_id_hint}"
+                binding:viewModel="@{signUpViewModel.idViewModel}" />
+
+            <TextView
+                android:id="@+id/tv_sign_up_pwd_guide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_sign_up_id"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:includeFontPadding="false"
+                android:text="@string/auth_all_pwd_guide"
+                android:textColor="@color/black"
+                android:textSize="12.5sp" />
+
+            <include
+                android:id="@+id/input_sign_up_pwd"
+                layout="@layout/v_input_over_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_sign_up_pwd_guide"
+                binding:checker="@{signUpViewModel.pwdChecker}"
+                binding:error="@{@string/auth_all_pwd_invalid_message}"
+                binding:essential="@{true}"
+                binding:encrypt="@{true}"
+                binding:hint="@{@string/auth_sign_up_pwd_hint}"
+                binding:viewModel="@{signUpViewModel.pwdViewModel}" />
+
+            <include
+                android:id="@+id/input_sign_up_repwd"
+                layout="@layout/v_input_over_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_sign_up_pwd"
+                binding:checker="@{signUpViewModel.rePwdChecker}"
+                binding:error="@{@string/auth_all_repwd_invalid_message}"
+                binding:essential="@{true}"
+                binding:encrypt="@{true}"
+                binding:hint="@{@string/auth_sign_up_re_pwd_hint}"
+                binding:viewModel="@{signUpViewModel.rePwdViewModel}" />
+
+            <EditText
+                android:id="@+id/et_sign_up_empty"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@+id/input_sign_up_repwd"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/btn_sign_up"
+                android:layout_width="142dp"
+                android:layout_height="41dp"
+                android:layout_below="@+id/et_sign_up_empty"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/btn_all_rounded_rect_red"
+                android:onClick="@{() -> signUpViewModel.onClickSignUp()}"
+                android:text="@string/auth_sign_up"
+                android:textColor="@color/white"
+                android:textSize="12.5sp" />
+
+            <TextView
+                android:id="@+id/tv_sign_up_privacy_guide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_sign_up"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/auth_sign_up_privacy_guide"
+                android:textColor="@color/black"
+                android:textSize="12.5sp" />
+
+            <Button
+                android:id="@+id/btn_sign_up_show_privacy"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_sign_up_privacy_guide"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/btn_all_background"
+                android:gravity="center"
+                android:onClick="@{() -> viewModel.setViewMode(ViewMode.POLICY)}"
+                android:text="@string/auth_sign_up_show_privacy"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="12.5sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</layout>

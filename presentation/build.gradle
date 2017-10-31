@@ -101,27 +101,29 @@ dependencies {
 
     compile project(':domain')
     compile project(':data')
-
+    implementation presentationDependencies.firebaseAuth
+    implementation presentationDependencies.firebaseDatabase
+    implementation presentationDependencies.firebaseStorage
     compile presentationDependencies.dagger
     compile presentationDependencies.daggerAndroidSupport
     compile presentationDependencies.glide
     compile presentationDependencies.recyclerView
-    compile presentationDependencies.rxPermission
-    compile presentationDependencies.rxJava
     compile presentationDependencies.rxAndroid
+    compile presentationDependencies.rxFirebaseAuth
+    compile presentationDependencies.rxFirebaseDatabase
+    compile presentationDependencies.rxJava
+    compile presentationDependencies.rxPermission
     compile presentationDependencies.supportAppcompatV7
     compile presentationDependencies.supportDesign
     compile developmentDependencies.stetho
     compile developmentDependencies.stethoConsole
     compile developmentDependencies.stethoOkhttp
     compile developmentDependencies.stethoUrlConneciton
-
     provided presentationDependencies.javaxAnnotation
     annotationProcessor presentationDependencies.daggerCompiler
     annotationProcessor presentationDependencies.daggerAndroidCompiler
     annotationProcessor presentationDependencies.glideCompiler
     compile presentationDependencies.archLifecycleJava8
-
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker
     androidTestCompile presentationTestDependencies.dexmakerMockito
@@ -135,3 +137,6 @@ dependencies {
     //Development
     compile developmentDependencies.leakCanary
 }
+
+
+apply plugin: 'com.google.gms.google-services'

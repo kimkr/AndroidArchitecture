@@ -25,7 +25,7 @@
             android:overScrollMode="never"
             android:stretchMode="columnWidth"
             binding:adapter="@{listViewModel.adapter}"
-            binding:dividerItemDecoration="@{@drawable/all_divider_list_vertical}"
+            binding:dividerItemDecoration="@{@drawable/divider_all_list_vertical}"
             binding:items="@{listViewModel.items}"
             binding:orientation="@{LinearLayout.VERTICAL}" />
 

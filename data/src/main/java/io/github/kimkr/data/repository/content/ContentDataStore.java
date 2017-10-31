@@ -3,8 +3,8 @@ package io.github.kimkr.data.repository.content;
 import java.util.List;
 
 import io.github.kimkr.data.entity.ContentEntity;
-import rx.Completable;
-import rx.Single;
+import io.reactivex.Completable;
+import io.reactivex.Single;
 
 /**
  * Created by kkr on 2017. 10. 28..

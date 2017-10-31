@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".view.photoalbum.PhotoAlbumActivity"
+            android:name=".view.auth.AuthActivity"
             android:label="KIMKR GALLERY"
             android:launchMode="singleTask"
             android:noHistory="true"
@@ -28,6 +28,12 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".view.photoalbum.PhotoAlbumActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
     </application>
 

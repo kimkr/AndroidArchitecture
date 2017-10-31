@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="io.github.kimkr.presentation.view.auth.ViewMode" />
+
+        <variable
+            name="viewModel"
+            type="io.github.kimkr.presentation.view.auth.AuthViewModel" />
+
+        <variable
+            name="signInViewModel"
+            type="io.github.kimkr.presentation.view.auth.signin.AuthSignInViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingLeft="39dp"
+        android:paddingRight="39dp"
+        android:paddingTop="62.5dp">
+
+        <include
+            android:id="@+id/input_sign_in_id"
+            layout="@layout/v_input_over_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:checker="@{signInViewModel.idChecker}"
+            binding:error="@{@string/auth_all_id_invalid_message}"
+            binding:essential="@{true}"
+            binding:hint="@{@string/auth_sign_in_id_hint}"
+            binding:viewModel="@{signInViewModel.idViewModel}" />
+
+        <include
+            android:id="@+id/input_sign_in_pwd"
+            layout="@layout/v_input_under_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_sign_in_id"
+            binding:checker="@{signInViewModel.pwdChecker}"
+            binding:encrypt="@{true}"
+            binding:error="@{@string/auth_all_pwd_invalid_message}"
+            binding:essential="@{true}"
+            binding:hint="@{@string/auth_sign_in_pwd_hint}"
+            binding:viewModel="@{signInViewModel.pwdViewModel}" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/input_sign_in_pwd"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btn_login_signin"
+            android:layout_width="142dp"
+            android:layout_height="41dp"
+            android:layout_below="@+id/input_sign_in_pwd"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/btn_all_rounded_rect_red"
+            android:onClick="@{() -> signInViewModel.onClickSignIn()}"
+            android:text="@string/auth_sign_in_title"
+            android:textColor="@color/white"
+            android:textSize="12.5sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_find_pwd_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/btn_login_signin"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tv_login_forgot_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/auth_sign_in_forgot_guide"
+                android:textColor="@color/black"
+                android:textSize="12.5sp" />
+
+            <Button
+                android:id="@+id/btn_login_find_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/btn_all_background"
+                android:gravity="center"
+                android:onClick="@{() -> viewModel.setViewMode(ViewMode.FINDPWD)}"
+                android:text="@string/auth_sign_in_click_here"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="12.5sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_sign_up_inducing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_find_pwd_button_container"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:gravity="center_horizontal|top"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="5dp"
+            android:lines="2"
+            android:text="@string/auth_sign_up_inducing_ment"
+            android:textColor="@color/black"
+            android:textSize="14.5sp" />
+
+        <Button
+            android:id="@+id/btn_sign_up"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_below="@+id/tv_sign_up_inducing"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_all_circle_red"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.setViewMode(ViewMode.SIGNUP)}"
+            android:text="@string/auth_sign_up_title"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14.5sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_below="@+id/btn_sign_up"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:scaleType="centerInside" />
+
+    </RelativeLayout>
+
+</layout>

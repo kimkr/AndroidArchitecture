@@ -4,7 +4,7 @@ Android-Architecture Guide Line
 
 
 
-### Keystore
+### 1) Keystore
 
 save `keystore.properties` file in your root project.
 ```
@@ -13,6 +13,10 @@ keyPassword=<key password>
 keyAlias=<key alias>
 storeFile=<key file path>
 ```
+
+### 2) RxJava2
+
+
 
 
 ## 1. Naming Guideline
@@ -118,5 +122,4 @@ Intent Action	    | ACTION_
     - [A successful XML naming convention](https://jeroenmols.com/blog/2016/03/07/resourcenaming/)
     - [ribot/android-guidelines](https://github.com/ribot/android-guidelines/blob/master/project_and_code_guidelines.md)
     
-    
-    
+

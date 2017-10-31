@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="io.github.kimkr.presentation.view.auth.ViewMode" />
+
+        <variable
+            name="viewModel"
+            type="io.github.kimkr.presentation.view.auth.AuthViewModel" />
+
+        <variable
+            name="signInViewModel"
+            type="io.github.kimkr.presentation.view.auth.signin.AuthSignInViewModel" />
+
+        <variable
+            name="signUpViewModel"
+            type="io.github.kimkr.presentation.view.auth.signup.AuthSignUpViewModel" />
+
+        <variable
+            name="findPwdViewModel"
+            type="io.github.kimkr.presentation.view.auth.findpwd.AuthFindPwdViewModel" />
+
+        <variable
+            name="changePwdViewModel"
+            type="io.github.kimkr.presentation.view.auth.changepwd.AuthChangePwdViewModel" />
+
+        <variable
+            name="policyViewModel"
+            type="io.github.kimkr.presentation.view.auth.policy.AuthPolicyViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/tb_auth"
+            layout="@layout/auth_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_auth_toolbar"
+            app:viewModel="@{viewModel}" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tb_auth">
+
+            <include
+                layout="@layout/auth_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{viewModel.viewMode == ViewMode.SIGNIN ? View.VISIBLE : View.GONE}"
+                app:signInViewModel="@{signInViewModel}"
+                app:viewModel="@{viewModel}" />
+
+            <include
+                layout="@layout/auth_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{viewModel.viewMode == ViewMode.SIGNUP ? View.VISIBLE : View.GONE}"
+                app:viewModel="@{viewModel}"
+                app:signUpViewModel="@{signUpViewModel}"/>
+
+            <!--<include-->
+            <!--layout="@layout/member_findpwd"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:visibility="@{viewModel.viewMode == ViewMode.FINDPWD ? View.VISIBLE : View.GONE}"-->
+            <!--app:viewModel="@{findPwdViewModel}" />-->
+
+            <!--<include-->
+            <!--layout="@layout/member_findpwd"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:visibility="@{viewModel.viewMode == ViewMode.CHANGEPWD ? View.VISIBLE : View.GONE}"-->
+            <!--app:viewModel="@{changePwdViewModel}" />-->
+
+            <!--<include-->
+            <!--layout="@layout/member_policy"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:visibility="@{viewModel.viewMode == ViewMode.POLICY ? View.VISIBLE : View.GONE}"-->
+            <!--app:viewModel="@{policyViewModel}" />-->
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -10,9 +10,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import io.github.kimkr.data.entity.ContentEntityDao;
+import io.github.kimkr.data.entity.ContentEntity;
 import io.github.kimkr.data.entity.DaoMaster;
 import io.github.kimkr.data.entity.DaoSession;
+import io.github.kimkr.data.repository.RxDao;
 import io.github.kimkr.domain.repository.ContentRepository;
 
 /**
@@ -39,8 +40,8 @@ public class ContentRepositoryModule {
 
     @Provides
     @Singleton
-    ContentEntityDao provideContentDao(DaoSession daoSession) {
-        return daoSession.getContentEntityDao();
+    RxDao<ContentEntity, Long> provideContentDao(DaoSession daoSession) {
+        return new RxDao<>(daoSession.getContentEntityDao());
     }
 
     @Provides

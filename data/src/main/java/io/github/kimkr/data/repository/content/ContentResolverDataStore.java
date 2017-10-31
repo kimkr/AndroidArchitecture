@@ -13,9 +13,9 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import io.github.kimkr.data.entity.ContentEntity;
-import rx.Completable;
-import rx.Single;
-import rx.functions.Func1;
+import io.reactivex.Completable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 
 /**
  * Created by kkr on 20/01/2017.
@@ -45,7 +45,7 @@ public class ContentResolverDataStore implements ContentDataStore {
     };
     private final String ORDERBY =
             String.format("IFNULL(%s, IFNULL(%s, 0)) ASC", DATE_ADDED, DATE_TAKEN);
-    private final Func1<Cursor, ContentEntity> mapper = cursor -> {
+    private final Function<Cursor, ContentEntity> mapper = cursor -> {
         ContentEntity contentEntity = new ContentEntity();
         int idxId = cursor.getColumnIndex(ID);
         int idxFilepath = cursor.getColumnIndex(FILEPATH);
@@ -98,7 +98,7 @@ public class ContentResolverDataStore implements ContentDataStore {
                             null);
             List<ContentEntity> contentEntities = new ArrayList<>();
             while (cursor.moveToNext()) {
-                contentEntities.add(mapper.call(cursor));
+                contentEntities.add(mapper.apply(cursor));
             }
             return contentEntities;
         });
@@ -114,7 +114,7 @@ public class ContentResolverDataStore implements ContentDataStore {
                             null,
                             null);
             if (cursor.moveToNext()) {
-                return mapper.call(cursor);
+                return mapper.apply(cursor);
             } else {
                 throw new Exception();
             }

@@ -10,13 +10,10 @@ import lombok.Data;
 public class User {
 
     private String id;
-    private String nickname;
-    private String image;
-    private String apiToken;
-    private String firebaseToken;
-    private String cognitoIdToken;
-    private String cognitoAccessToken;
-    private String cloudFrontPolicyKey;
-    private String cloudFrontSignature;
-    private String cloudFrontKeyPairId;
+    private String provider;
+    private String name;
+    private String photo;
+    private String email;
+    private String phone;
+    private Boolean verified;
 }

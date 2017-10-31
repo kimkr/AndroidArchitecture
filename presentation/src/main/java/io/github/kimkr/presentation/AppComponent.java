@@ -13,6 +13,7 @@ import dagger.Component;
 import dagger.android.support.AndroidSupportInjectionModule;
 import io.github.kimkr.data.repository.content.ContentRepositoryModule;
 import io.github.kimkr.data.repository.DaoModule;
+import io.github.kimkr.data.repository.user.UserRepositoryModule;
 import io.github.kimkr.presentation.library.logger.LoggerModule;
 
 @Singleton
@@ -21,6 +22,7 @@ import io.github.kimkr.presentation.library.logger.LoggerModule;
         AppModule.class,
         LoggerModule.class,
         DaoModule.class,
+        UserRepositoryModule.class,
         ContentRepositoryModule.class,
         ActivityBuilder.class})
 public interface AppComponent {

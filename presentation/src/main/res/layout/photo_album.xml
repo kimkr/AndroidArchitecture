@@ -42,10 +42,10 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="4dp"
-                android:background="@drawable/all_btn_background"
+                android:background="@drawable/btn_all_background"
                 android:onClick="@{(v) -> viewModel.setViewMode(ViewMode.LIST)}"
                 android:scaleType="centerInside"
-                android:src="@drawable/all_btn_list"
+                android:src="@drawable/btn_all_list"
                 binding:selected="@{viewModel.viewMode == ViewMode.LIST}" />
 
             <ImageButton
@@ -53,10 +53,10 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="12dp"
-                android:background="@drawable/all_btn_background"
+                android:background="@drawable/btn_all_background"
                 android:onClick="@{(v) -> viewModel.setViewMode(ViewMode.GRID)}"
                 android:scaleType="centerInside"
-                android:src="@drawable/all_btn_grid"
+                android:src="@drawable/btn_all_grid"
                 binding:selected="@{viewModel.viewMode == ViewMode.GRID}" />
 
         </LinearLayout>

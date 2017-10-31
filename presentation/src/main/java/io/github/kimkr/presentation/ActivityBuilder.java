@@ -7,6 +7,8 @@ import dagger.Module;
 import dagger.android.ActivityKey;
 import dagger.android.AndroidInjector;
 import dagger.multibindings.IntoMap;
+import io.github.kimkr.presentation.view.auth.AuthActivity;
+import io.github.kimkr.presentation.view.auth.AuthComponent;
 import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumActivity;
 import io.github.kimkr.presentation.view.photoalbum.PhotoAlbumComponent;
 
@@ -22,4 +24,10 @@ public abstract class ActivityBuilder {
     @ActivityKey(PhotoAlbumActivity.class)
     abstract AndroidInjector.Factory<? extends Activity> bindPhotoAlbumActivity(
             PhotoAlbumComponent.Builder builder);
+
+    @Binds
+    @IntoMap
+    @ActivityKey(AuthActivity.class)
+    abstract AndroidInjector.Factory<? extends Activity> bindAuthActivity(
+            AuthComponent.Builder builder);
 }

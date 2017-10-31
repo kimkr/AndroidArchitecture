@@ -1,7 +1,5 @@
 package io.github.kimkr.data.repository.content;
 
-import org.greenrobot.greendao.rx.RxDao;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,8 +7,10 @@ import javax.inject.Singleton;
 
 import io.github.kimkr.data.entity.ContentEntity;
 import io.github.kimkr.data.entity.ContentEntityDao;
-import rx.Completable;
-import rx.Single;
+import io.github.kimkr.data.repository.RxDao;
+import io.reactivex.Completable;
+import io.reactivex.Single;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by kkr on 2017. 10. 31..
@@ -19,40 +19,37 @@ import rx.Single;
 @Singleton
 public class ContentLocalDataStore implements ContentDataStore {
 
-    private final ContentEntityDao contentEntityDao;
     private final RxDao<ContentEntity, Long> contentRxDao;
 
     @Inject
-    public ContentLocalDataStore(ContentEntityDao contentEntityDao) {
-        this.contentEntityDao = contentEntityDao;
-        this.contentRxDao = contentEntityDao.rx();
+    public ContentLocalDataStore(RxDao<ContentEntity, Long> contentRxDao) {
+        this.contentRxDao = contentRxDao;
     }
 
     @Override
     public Single<List<ContentEntity>> getContents() {
-        return contentRxDao.loadAll().toSingle();
+        return contentRxDao.loadAll();
     }
 
     @Override
     public Single<ContentEntity> getContent(long id) {
-        return contentRxDao.load(id).toSingle();
+        return contentRxDao.load(id);
     }
 
     @Override
     public Single<Integer> getContentCount() {
         return contentRxDao.count()
-                .map(count -> count != null ? count.intValue() : null)
-                .toSingle();
+                .map(count -> count != null ? count.intValue() : null);
     }
 
     @Override
     public Single<ContentEntity> save(ContentEntity contentEntity) {
-        return contentRxDao.insertOrReplace(contentEntity).toSingle();
+        return contentRxDao.insertOrReplace(contentEntity);
     }
 
     @Override
     public Completable delete(long id) {
-        return contentRxDao.deleteByKey(id).toCompletable();
+        return contentRxDao.deleteByKey(id);
     }
 
     @Override
@@ -61,7 +58,6 @@ public class ContentLocalDataStore implements ContentDataStore {
                 contentRxDao.getDao()
                         .queryBuilder()
                         .where(ContentEntityDao.Properties.Path.eq(path))
-                        .list())
-                .toCompletable();
+                        .list());
     }
 }

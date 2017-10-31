@@ -9,19 +9,23 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.support.annotation.NonNull;
 
-import com.tbruyelle.rxpermissions.RxPermissions;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.github.kimkr.data.injection.ActivityScope;
+import io.github.kimkr.domain.entity.Content;
 import io.github.kimkr.domain.repository.ContentRepository;
 import io.github.kimkr.presentation.BR;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -45,14 +49,11 @@ public class PhotoAlbumViewModel extends BaseObservable implements DefaultLifecy
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
         gainStoragePermission()
-                .flatMap(granted -> {
-                    if (granted) {
-                        return loadItems();
-                    }
-                    return Observable.error(new Exception("Failed to gain permission"));
-                })
-                .subscribe(items -> this.items.addAll(items),
-                        e -> activityWeakReference.get().showToast(e.getMessage()));
+                .filter(granted -> granted)
+                .subscribe(granted -> loadItems()
+                                .subscribe(items -> this.items.addAll(items),
+                                        this::showError),
+                        this::showError);
     }
 
     @Bindable
@@ -67,9 +68,9 @@ public class PhotoAlbumViewModel extends BaseObservable implements DefaultLifecy
 
     public void startViewer(Long startContent) {
         // TEST
-        Observable.from(items)
+        Flowable.fromIterable(items)
                 .filter(item -> item.getId().equals(startContent))
-                .first()
+                .firstElement()
                 .map(item -> item.getContent())
                 .subscribe(content -> contentRepository.save(content)
                                 .subscribe((saved) -> Timber.d("saving completed : %s", saved),
@@ -78,12 +79,15 @@ public class PhotoAlbumViewModel extends BaseObservable implements DefaultLifecy
         activityWeakReference.get().showViewer(startContent);
     }
 
-    public Observable<List<PhotoAlbumItemViewModel>> loadItems() {
+    public Single<List<PhotoAlbumItemViewModel>> loadItems() {
         return contentRepository.getContents()
-                .toObservable()
-                .flatMap(Observable::from)
-                .map(PhotoAlbumItemViewModel::new)
-                .toList()
+                .map(contents -> {
+                    List<PhotoAlbumItemViewModel> itemViewModels = new ArrayList<>();
+                    for (Content content : contents) {
+                        itemViewModels.add(new PhotoAlbumItemViewModel(content));
+                    }
+                    return itemViewModels;
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -92,5 +96,9 @@ public class PhotoAlbumViewModel extends BaseObservable implements DefaultLifecy
         RxPermissions permissions = new RxPermissions(activityWeakReference.get());
         return permissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE);
+    }
+
+    private void showError(Throwable e) {
+        activityWeakReference.get().showToast(e.getMessage());
     }
 }

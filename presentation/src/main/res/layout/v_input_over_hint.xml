@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.widget.EditText" />
+
+        <import type="io.github.kimkr.presentation.viewcomponent.input.InputState" />
+
+        <variable
+            name="hint"
+            type="String" />
+
+        <variable
+            name="error"
+            type="String" />
+
+        <variable
+            name="checker"
+            type="io.reactivex.functions.Function&lt;String, Boolean>" />
+
+        <variable
+            name="minLen"
+            type="Integer" />
+
+        <variable
+            name="maxLen"
+            type="Integer" />
+
+        <variable
+            name="encrypt"
+            type="Boolean" />
+
+        <variable
+            name="essential"
+            type="Boolean" />
+
+        <variable
+            name="viewModel"
+            type="io.github.kimkr.presentation.viewcomponent.input.InputViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_input_guide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:textColor="@color/red"
+            android:textSize="10sp"
+            binding:invalidInputError="@{error}"
+            binding:state="@{viewModel.state}" />
+
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_below="@+id/tv_input_guide"
+            android:background="@drawable/bg_all_rect_orange_border_white_filled"
+            android:gravity="center_vertical|left"
+            android:hint="@{hint}"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingLeft="4dp"
+            android:paddingRight="36dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/orange"
+            android:textSize="16sp"
+            binding:checker="@{checker}"
+            binding:defaultBackground="@{@drawable/bg_all_rect_orange_border_white_filled}"
+            binding:encrypt="@{encrypt == null ? false : encrypt}"
+            binding:errorBackground="@{@drawable/bg_all_rect_red_border_white_filled}"
+            binding:essential="@{essential}"
+            binding:state="@{viewModel.state}"
+            binding:validBackground="@{@drawable/bg_all_rect_blue_border_white_filled}"
+            binding:viewModel="@{viewModel}" />
+
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignRight="@+id/et_input"
+            android:layout_alignTop="@+id/et_input"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/btn_all_background"
+            android:onClick='@{(v) -> viewModel.clearInput(etInput)}'
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_all_cancel_yellow"
+            android:visibility="@{viewModel.state == InputState.FOCUS_ON_INVALID || viewModel.state == InputState.FOCUS_ON_VALID ? View.VISIBLE : View.INVISIBLE}" />
+
+    </RelativeLayout>
+
+</layout>
