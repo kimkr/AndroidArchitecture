@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.databinding.ObservableField" />
+
+        <import type="io.github.kimkr.presentation.view.photoalbum.ViewMode" />
+
+        <variable
+            name="viewModel"
+            type="io.github.kimkr.presentation.view.photoalbum.PhotoAlbumViewModel" />
+
+        <variable
+            name="listViewModel"
+            type="io.github.kimkr.presentation.view.photoalbum.list.PhotoAlbumListViewModel" />
+
+        <variable
+            name="gridViewModel"
+            type="io.github.kimkr.presentation.view.photoalbum.grid.PhotoAlbumGridViewModel" />
+
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_photoalbum_list_mode"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/btn_all_background"
+                android:onClick="@{(v) -> viewModel.setViewMode(ViewMode.LIST)}"
+                android:scaleType="centerInside"
+                android:src="@drawable/btn_all_list"
+                binding:selected="@{viewModel.viewMode == ViewMode.LIST}" />
+
+            <ImageButton
+                android:id="@+id/btn_photoalbum_grid_mode"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/btn_all_background"
+                android:onClick="@{(v) -> viewModel.setViewMode(ViewMode.GRID)}"
+                android:scaleType="centerInside"
+                android:src="@drawable/btn_all_grid"
+                binding:selected="@{viewModel.viewMode == ViewMode.GRID}" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <include
+                layout="@layout/photo_album_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{viewModel.viewMode == ViewMode.LIST ? View.VISIBLE : View.GONE}"
+                binding:listViewModel="@{listViewModel}" />
+
+            <include
+                layout="@layout/photo_album_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="@{viewModel.viewMode == ViewMode.GRID ? View.VISIBLE : View.GONE}"
+                binding:gridViewModel="@{gridViewModel}" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

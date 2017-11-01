@@ -5,12 +5,13 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:3.0.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-        classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
-        classpath 'com.squareup.sqldelight:gradle-plugin:0.6.1'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
+        classpath 'com.google.gms:google-services:3.1.0'
     }
 }
 
@@ -22,6 +23,11 @@ allprojects {
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         testApplicationId = 'io.github.kimkr.test'
     }
+}
+
+task wrapper(type: Wrapper) {
+    description 'Creates the gradle wrapper.'
+    gradleVersion '3.4.0'
 }
 
 task runDomainUnitTests(dependsOn: [':domain:test']) {

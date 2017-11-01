@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <selector>
+            <item android:state_pressed="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/size_all_btn_corner" />
+                    <solid android:color="@color/green" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</layer-list>

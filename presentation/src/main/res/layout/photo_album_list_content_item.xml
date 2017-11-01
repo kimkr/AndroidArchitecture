@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.widget.LinearLayout" />
+
+        <variable
+            name="viewModel"
+            type="io.github.kimkr.presentation.view.photoalbum.list.PhotoAlbumListViewModel" />
+
+        <variable
+            name="itemViewModel"
+            type="io.github.kimkr.presentation.view.photoalbum.PhotoAlbumItemViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/black"
+        android:clickable="true"
+        android:onClick="@{(v) -> viewModel.onClickContent(itemViewModel.id)}"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{itemViewModel.name}"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@{itemViewModel.path}"
+            binding:type="@{itemViewModel.mime}" />
+
+    </LinearLayout>
+
+</layout>

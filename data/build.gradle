@@ -2,15 +2,10 @@ buildscript {
     repositories {
         mavenCentral()
     }
-    dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:3.2.3'
-    }
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.squareup.sqldelight'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     defaultPublishConfig "debug"
@@ -24,6 +19,13 @@ android {
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
     }
 
     compileOptions {
@@ -54,21 +56,36 @@ dependencies {
     def testDependencies = rootProject.ext.dataTestDependencies
 
     compile project(':domain')
-    apt dataDependencies.autoValue
-    apt dataDependencies.daggerCompiler
-    apt dataDependencies.lombok
-    provided dataDependencies.autoValueAnnotation
+    annotationProcessor dataDependencies.autoValue
+    annotationProcessor dataDependencies.daggerCompiler
+    annotationProcessor dataDependencies.daggerAndroidCompiler
+    annotationProcessor dataDependencies.lombok
     provided dataDependencies.javaxAnnotation
-    provided dataDependencies.lombok
+    implementation dataDependencies.firebaseAuth
+    implementation dataDependencies.firebaseAuthGoogle
+    implementation dataDependencies.firebaseCore
+    implementation dataDependencies.firebaseDatabase
+    implementation dataDependencies.firebaseStorage
+    compile dataDependencies.lombok
     compile dataDependencies.androidAnnotations
     compile dataDependencies.dagger
+    compile dataDependencies.daggerAndroidSupport
+    compile dataDependencies.greenDao
     compile dataDependencies.gson
     compile dataDependencies.javaxInject
     compile dataDependencies.okHttp
     compile dataDependencies.rxAndroid
+    compile dataDependencies.rxFirebaseAuth
+    compile dataDependencies.rxFirebaseDatabase
     compile dataDependencies.rxJava
+    compile dataDependencies.timber
     testCompile testDependencies.assertj
     testCompile testDependencies.junit
     testCompile testDependencies.mockito
     testCompile testDependencies.robolectric
+
+    androidTestCompile testDependencies.junit
+    androidTestCompile(testDependencies.testRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }

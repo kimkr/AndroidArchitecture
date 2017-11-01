@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Commons">
+        <attr name="ratioWidth" format="reference|integer" />
+        <attr name="ratioHeight" format="reference|integer" />
+    </declare-styleable>
+
+</resources>

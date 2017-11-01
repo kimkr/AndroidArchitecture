@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="io.github.kimkr.presentation.view.auth.ViewMode" />
+
+        <variable
+            name="viewModel"
+            type="io.github.kimkr.presentation.view.auth.AuthViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_auth_toolbar"
+        android:background="@color/orange"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <ImageButton
+            android:layout_width="@dimen/size_auth_toolbar_btn"
+            android:layout_height="@dimen/size_auth_toolbar_btn"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:onClick="@{(v) -> viewModel.onClickBack()}"
+            android:padding="2dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_all_arrow_back_white"
+            android:visibility="@{viewModel.viewMode != ViewMode.SIGNIN ? View.VISIBLE : View.GONE}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@{viewModel.viewMode}"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</layout>

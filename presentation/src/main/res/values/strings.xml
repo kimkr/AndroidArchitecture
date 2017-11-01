@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app">KIMKR Android Architecture</string>
+    <string name="all_tag_flag">TAG_FLAG</string>
+    <!-- AUTH - ALL -->
+    <string name="auth_all_email">email</string>
+    <string name="auth_all_password">password</string>
+    <string name="auth_all_id_invalid_message">Invalid email address</string>
+    <string name="auth_all_pwd_invalid_message">Invalid password</string>
+    <string name="auth_all_pwd_guide">Please use at least 8 letters - consisted of ALL of the followings: capital letters, small letters, numbers and special characters (e.g., ! or ?).</string>
+    <string name="auth_all_repwd_invalid_message">Passwords do not match.</string>
+    <!-- AUTH - SIGN IN -->
+    <string name="auth_sign_in_title">Sign In</string>
+    <string name="auth_sign_in_click_here"><u>click here</u></string>
+    <string name="auth_sign_in_forgot_guide">forgot your password?</string>
+    <string name="auth_sign_in_id_hint">Email</string>
+    <string name="auth_sign_in_pwd_hint">Password</string>
+    <!-- AUTH - SIGN UP -->
+    <string name="auth_sign_up_title">Sign Up</string>
+    <string name="auth_sign_up_inducing_ment">Are not you a member yet?\Join and enjoy!</string>
+    <string name="auth_sign_up_enter_info">Enter member information</string>
+    <string name="auth_sign_up_email_guide">If you forget your password, you will receive a link in this email address to activate your new password.</string>
+    <string name="auth_sign_up_id_hint">Enter your email address as your ID</string>
+    <string name="auth_sign_up_pwd_hint">Enter password</string>
+    <string name="auth_sign_up_re_pwd_hint">Confirm password</string>
+    <string name="auth_sign_up_nickname_hint">Enter nickname (optional)</string>
+    <string name="auth_sign_up_privacy_guide">By signing up, you agree to the terms of usage and privacy protection policy.</string>
+    <string name="auth_sign_up_show_privacy"><u>View privacy policy</u></string>
+    <!-- AUTH - FIND PWD -->
+    <string name="auth_find_pwd_title">Find Password</string>
+    <string name="auth_find_pwd_id_guide">Please enter your current ID (email address)</string>
+    <string name="auth_find_pwd_new_pwd">New password</string>
+    <string name="auth_find_pwd_new_pwd_hint">New password</string>
+    <string name="auth_find_pwd_old_pwd">Old password</string>
+    <string name="auth_find_pwd_old_pwd_hint">Old password</string>
+    <string name="auth_find_pwd_re_pwd_hint">Confirm Password</string>
+    <string name="auth_find_pwd_guide">We sent you an email. Click on the link and activate your new password.\nPlease check your email in your current ID (email address).</string>
+    <!-- AUTH - RESET PWD-->
+    <string name="auth_change_pwd_title">Reset Password</string>
+    <!-- AUTH - POLICY -->
+    <string name="auth_policy_title">Terms of Usage &amp;&amp; Privacy Policy</string>
+    <string name="auth_privacy_policy">Privacy Policy</string>
+    <string name="auth_privacy_right">Terms of Usage</string>
 </resources>
