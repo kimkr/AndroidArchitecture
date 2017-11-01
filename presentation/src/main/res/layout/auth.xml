@@ -52,6 +52,7 @@
             android:layout_below="@+id/tb_auth">
 
             <include
+                android:id="@+id/sign_in"
                 layout="@layout/auth_sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -60,12 +61,13 @@
                 app:viewModel="@{viewModel}" />
 
             <include
+                android:id="@+id/sign_up"
                 layout="@layout/auth_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="@{viewModel.viewMode == ViewMode.SIGNUP ? View.VISIBLE : View.GONE}"
-                app:viewModel="@{viewModel}"
-                app:signUpViewModel="@{signUpViewModel}"/>
+                app:signUpViewModel="@{signUpViewModel}"
+                app:viewModel="@{viewModel}" />
 
             <!--<include-->
             <!--layout="@layout/member_findpwd"-->

@@ -1,12 +1,14 @@
 package io.github.kimkr.data.repository.user;
 
 import com.androidhuman.rxfirebase2.auth.RxFirebaseAuth;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -36,5 +38,20 @@ public class UserFirebaseDataStore implements UserDataStore {
     @Override
     public Single<FirebaseUser> signIn(String email, String password) {
         return RxFirebaseAuth.signInWithEmailAndPassword(auth, email, password);
+    }
+
+    @Override
+    public Single<FirebaseUser> signInWithCredential(AuthCredential authCredential) {
+        return RxFirebaseAuth.signInWithCredential(auth, authCredential);
+    }
+
+    @Override
+    public Completable signOut() {
+        return RxFirebaseAuth.signOut(auth);
+    }
+
+    @Override
+    public Completable resetPassword(String email){
+        return RxFirebaseAuth.sendPasswordResetEmail(auth, email);
     }
 }

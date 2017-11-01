@@ -1,7 +1,12 @@
 package io.github.kimkr.presentation.view.auth.signin;
 
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.AuthCredential;
 
 import java.lang.ref.WeakReference;
 
@@ -23,27 +28,29 @@ import timber.log.Timber;
 @ActivityScope
 public class AuthSignInViewModel extends BaseObservable {
 
-    public final InputViewModel idViewModel;
-    public final InputViewModel pwdViewModel;
-    private final InputValidator inputValidator;
-    private final UserRepository userRepository;
-    private final WeakReference<AuthActivity> authActivityWeakReference;
-    private final String invalidIdMsg;
-    private final String invalidPwdMsg;
+    @Inject
+    @Named("auth_id_view_model")
+    public InputViewModel idViewModel;
+    @Inject
+    @Named("auth_pwd_view_model")
+    public InputViewModel pwdViewModel;
+    @Inject
+    WeakReference<AuthActivity> authActivityWeakReference;
+    @Inject
+    InputValidator inputValidator;
+    @Inject
+    UserRepository userRepository;
+    @Inject
+    GoogleApiClient googleApiClient;
+    @Inject
+    @Named("auth_sign_up_id_invalid")
+    String invalidIdMsg;
+    @Inject
+    @Named("auth_sign_up_pwd_invalid")
+    String invalidPwdMsg;
 
     @Inject
-    public AuthSignInViewModel(InputValidator inputValidator,
-                               UserRepository userRepository,
-                               WeakReference<AuthActivity> authActivityWeakReference,
-                               @Named("auth_sign_up_id_invalid") String invalidIdMsg,
-                               @Named("auth_sign_up_pwd_invalid") String invalidPwdMsg) {
-        this.inputValidator = inputValidator;
-        this.userRepository = userRepository;
-        this.authActivityWeakReference = authActivityWeakReference;
-        this.invalidIdMsg = invalidIdMsg;
-        this.invalidPwdMsg = invalidPwdMsg;
-        idViewModel = new InputViewModel(true, false);
-        pwdViewModel = new InputViewModel(true, true);
+    public AuthSignInViewModel() {
     }
 
     @Bindable
@@ -57,19 +64,36 @@ public class AuthSignInViewModel extends BaseObservable {
     }
 
     public void onClickSignIn() {
-        String id = idViewModel.getInput();
-        String pwd = pwdViewModel.getInput();
-        if (!inputValidator.isValidEmail(id)) {
+        String email = idViewModel.getInput();
+        String password = pwdViewModel.getInput();
+        signIn(email, password);
+    }
+
+    public void onClickGoogleSignIn() {
+        Timber.d("onClickGoogleSignIn");
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        authActivityWeakReference.get().startActivityForResult(signInIntent, AuthActivity.RC_GOOGLE_SIGN_IN);
+    }
+
+    public void signIn(String email, String password) {
+        if (email == null || !inputValidator.isValidEmail(email)) {
             authActivityWeakReference.get().showToast(invalidIdMsg);
             return;
         }
-        if (!inputValidator.isValidPwd(pwd)) {
+        if (password == null || !inputValidator.isValidPwd(password)) {
             authActivityWeakReference.get().showToast(invalidPwdMsg);
             return;
         }
-        userRepository.signIn(id.trim(), pwd.trim())
+        userRepository.signIn(email.trim(), password.trim())
                 .subscribe(user -> {
                     Timber.d("sign in success");
-                }, e -> authActivityWeakReference.get().showToast(e.getMessage()));
+                }, e -> authActivityWeakReference.get().showToast(e.toString()));
+    }
+
+    public void signIn(AuthCredential authCredential) {
+        userRepository.signInWithCredential(authCredential)
+                .subscribe(user -> {
+                    Timber.d("sign in success");
+                }, e -> authActivityWeakReference.get().showToast(e.toString()));
     }
 }

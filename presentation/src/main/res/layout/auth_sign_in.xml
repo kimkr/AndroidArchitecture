@@ -146,13 +146,21 @@
             android:textSize="14.5sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btn_google_sign_in"
+            android:layout_width="240dp"
+            android:layout_height="32dp"
             android:layout_below="@+id/btn_sign_up"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
-            android:scaleType="centerInside" />
+            android:layout_marginTop="4dp" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btn_facebook_sign_in"
+            android:layout_width="240dp"
+            android:layout_height="32dp"
+            android:layout_below="@+id/btn_google_sign_in"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp" />
 
     </RelativeLayout>
 

@@ -62,6 +62,8 @@ dependencies {
     annotationProcessor dataDependencies.lombok
     provided dataDependencies.javaxAnnotation
     implementation dataDependencies.firebaseAuth
+    implementation dataDependencies.firebaseAuthGoogle
+    implementation dataDependencies.firebaseCore
     implementation dataDependencies.firebaseDatabase
     implementation dataDependencies.firebaseStorage
     compile dataDependencies.lombok

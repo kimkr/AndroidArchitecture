@@ -101,7 +101,10 @@ dependencies {
 
     compile project(':domain')
     compile project(':data')
+    implementation presentationDependencies.facebookLogin
     implementation presentationDependencies.firebaseAuth
+    implementation presentationDependencies.firebaseAuthGoogle
+    implementation presentationDependencies.firebaseCore
     implementation presentationDependencies.firebaseDatabase
     implementation presentationDependencies.firebaseStorage
     compile presentationDependencies.dagger

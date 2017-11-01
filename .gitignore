@@ -22,7 +22,8 @@ build/
 # Local configuration file (sdk path, etc)
 local.properties
 /*/google-services.json
-  
+presentation/src/main/res/values/config.xml
+ 
 # Eclipse project files
 .classpath
 .project

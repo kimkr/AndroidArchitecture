@@ -1,7 +1,9 @@
 package io.github.kimkr.data.repository.user;
 
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -15,4 +17,10 @@ public interface UserDataStore {
     Single<FirebaseUser> signUp(String email, String pwd);
 
     Single<FirebaseUser> signIn(String email, String pwd);
+
+    Single<FirebaseUser> signInWithCredential(AuthCredential authCredential);
+
+    Completable signOut();
+
+    Completable resetPassword(String email);
 }

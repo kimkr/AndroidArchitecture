@@ -23,32 +23,33 @@ import timber.log.Timber;
 @ActivityScope
 public class AuthSignUpViewModel extends BaseObservable {
 
-    public final InputViewModel idViewModel;
-    public final InputViewModel pwdViewModel;
-    public final InputViewModel rePwdViewModel;
-    private final InputValidator inputValidator;
-    private final UserRepository userRepository;
-    private final WeakReference<AuthActivity> authActivityWeakReference;
-    private final String invalidIdMsg;
-    private final String invalidPwdMsg;
-    private final String invalidRePwdMsg;
+    @Inject
+    @Named("auth_id_view_model")
+    public InputViewModel idViewModel;
+    @Inject
+    @Named("auth_pwd_view_model")
+    public InputViewModel pwdViewModel;
+    @Inject
+    @Named("auth_repwd_view_model")
+    public InputViewModel rePwdViewModel;
+    @Inject
+    InputValidator inputValidator;
+    @Inject
+    UserRepository userRepository;
+    @Inject
+    WeakReference<AuthActivity> authActivityWeakReference;
+    @Inject
+    @Named("auth_sign_up_id_invalid")
+    String invalidIdMsg;
+    @Inject
+    @Named("auth_sign_up_pwd_invalid")
+    String invalidPwdMsg;
+    @Inject
+    @Named("auth_sign_up_repwd_invalid")
+    String invalidRePwdMsg;
 
     @Inject
-    public AuthSignUpViewModel(InputValidator inputValidator,
-                               UserRepository userRepository,
-                               WeakReference<AuthActivity> authActivityWeakReference,
-                               @Named("auth_sign_up_id_invalid") String invalidIdMsg,
-                               @Named("auth_sign_up_pwd_invalid") String invalidPwdMsg,
-                               @Named("auth_sign_up_repwd_invalid") String invalidRePwdMsg) {
-        this.inputValidator = inputValidator;
-        this.userRepository = userRepository;
-        this.authActivityWeakReference = authActivityWeakReference;
-        this.invalidIdMsg = invalidIdMsg;
-        this.invalidPwdMsg = invalidPwdMsg;
-        this.invalidRePwdMsg = invalidRePwdMsg;
-        idViewModel = new InputViewModel(true, false);
-        pwdViewModel = new InputViewModel(true, true);
-        rePwdViewModel = new InputViewModel(true, true);
+    public AuthSignUpViewModel() {
     }
 
     @Bindable
@@ -88,7 +89,7 @@ public class AuthSignUpViewModel extends BaseObservable {
         userRepository.signUp(id.trim(), pwd.trim())
                 .subscribe(user -> {
                     Timber.d("sign up success");
-                }, e -> authActivityWeakReference.get().showToast(e.getMessage()));
+                }, e -> authActivityWeakReference.get().showToast(e.toString()));
     }
 
     private boolean isValidRePwd(String pwd, String repwd) {
