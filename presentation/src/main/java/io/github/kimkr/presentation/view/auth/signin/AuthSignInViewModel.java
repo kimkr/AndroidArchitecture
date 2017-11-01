@@ -16,6 +16,7 @@ import javax.inject.Named;
 import io.github.kimkr.data.injection.ActivityScope;
 import io.github.kimkr.domain.repository.UserRepository;
 import io.github.kimkr.presentation.view.auth.AuthActivity;
+import io.github.kimkr.presentation.view.navigation.Navigator;
 import io.github.kimkr.presentation.viewcomponent.input.InputValidator;
 import io.github.kimkr.presentation.viewcomponent.input.InputViewModel;
 import io.reactivex.functions.Function;
@@ -36,6 +37,8 @@ public class AuthSignInViewModel extends BaseObservable {
     public InputViewModel pwdViewModel;
     @Inject
     WeakReference<AuthActivity> authActivityWeakReference;
+    @Inject
+    Navigator navigator;
     @Inject
     InputValidator inputValidator;
     @Inject
@@ -87,6 +90,7 @@ public class AuthSignInViewModel extends BaseObservable {
         userRepository.signIn(email.trim(), password.trim())
                 .subscribe(user -> {
                     Timber.d("sign in success");
+                    navigator.navigateToPhotoAlbum(authActivityWeakReference.get(), "test");
                 }, e -> authActivityWeakReference.get().showToast(e.toString()));
     }
 
@@ -94,6 +98,7 @@ public class AuthSignInViewModel extends BaseObservable {
         userRepository.signInWithCredential(authCredential)
                 .subscribe(user -> {
                     Timber.d("sign in success");
+                    navigator.navigateToPhotoAlbum(authActivityWeakReference.get(), "test");
                 }, e -> authActivityWeakReference.get().showToast(e.toString()));
     }
 }
